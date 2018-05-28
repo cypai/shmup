@@ -15,7 +15,7 @@ import com.pipai.shmup.artemis.components.StaticSpriteComponent;
 import com.pipai.shmup.artemis.components.XyComponent;
 import com.pipai.shmup.artemis.systems.InputProcessingSystem;
 import com.pipai.shmup.artemis.systems.RenderingSystem;
-import com.pipai.shmup.artemis.systems.input.ControlInputProcessor;
+import com.pipai.shmup.artemis.systems.ControlSystem;
 import com.pipai.shmup.artemis.systems.input.ExitInputProcessor;
 import net.mostlyoriginal.api.event.common.EventSystem;
 
@@ -37,7 +37,7 @@ public class MainLevelScreen implements Screen {
         world = new World(config);
 
         InputProcessingSystem inputProcessingSystem = world.getSystem(InputProcessingSystem.class);
-        inputProcessingSystem.addProcessor(new ControlInputProcessor());
+        inputProcessingSystem.addProcessor(new ControlSystem());
         inputProcessingSystem.addProcessor(new ExitInputProcessor());
 
         int playerId = world.create();
