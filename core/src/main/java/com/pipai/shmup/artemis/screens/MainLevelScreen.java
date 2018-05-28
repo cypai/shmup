@@ -3,11 +3,15 @@ package com.pipai.shmup.artemis.screens;
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
 import com.artemis.WorldConfigurationBuilder;
+import com.artemis.managers.GroupManager;
 import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.pipai.shmup.ShmupGame;
+import com.pipai.shmup.artemis.systems.InputProcessingSystem;
+import com.pipai.shmup.artemis.systems.input.ControlInputProcessor;
+import com.pipai.shmup.artemis.systems.input.ExitInputProcessor;
 import net.mostlyoriginal.api.event.common.EventSystem;
 
 public class MainLevelScreen implements Screen {
@@ -18,10 +22,17 @@ public class MainLevelScreen implements Screen {
         WorldConfiguration config = new WorldConfigurationBuilder()
                 .with(
                         new TagManager(),
-                        new EventSystem())
+                        new GroupManager(),
+                        new EventSystem(),
+
+                        new InputProcessingSystem())
                 .build();
 
         world = new World(config);
+
+        InputProcessingSystem inputProcessingSystem = world.getSystem(InputProcessingSystem.class);
+        inputProcessingSystem.addProcessor(new ControlInputProcessor());
+        inputProcessingSystem.addProcessor(new ExitInputProcessor());
     }
 
     @Override
