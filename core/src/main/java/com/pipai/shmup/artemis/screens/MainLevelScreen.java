@@ -8,8 +8,13 @@ import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
+import com.pipai.shmup.artemis.components.StaticSpriteComponent;
+import com.pipai.shmup.artemis.components.XyComponent;
 import com.pipai.shmup.artemis.systems.InputProcessingSystem;
+import com.pipai.shmup.artemis.systems.RenderingSystem;
 import com.pipai.shmup.artemis.systems.input.ControlInputProcessor;
 import com.pipai.shmup.artemis.systems.input.ExitInputProcessor;
 import net.mostlyoriginal.api.event.common.EventSystem;
@@ -25,7 +30,8 @@ public class MainLevelScreen implements Screen {
                         new GroupManager(),
                         new EventSystem(),
 
-                        new InputProcessingSystem())
+                        new InputProcessingSystem(),
+                        new RenderingSystem(game))
                 .build();
 
         world = new World(config);
@@ -33,6 +39,11 @@ public class MainLevelScreen implements Screen {
         InputProcessingSystem inputProcessingSystem = world.getSystem(InputProcessingSystem.class);
         inputProcessingSystem.addProcessor(new ControlInputProcessor());
         inputProcessingSystem.addProcessor(new ExitInputProcessor());
+
+        int playerId = world.create();
+        XyComponent cPlayerXy = world.getMapper(XyComponent.class).create(playerId);
+        StaticSpriteComponent cPlayerSprite = world.getMapper(StaticSpriteComponent.class).create(playerId);
+        cPlayerSprite.sprite = new Sprite(game.getAssetManager().get("data/ship.png", Texture.class));
     }
 
     @Override
