@@ -2,9 +2,11 @@ package com.pipai.shmup.artemis.systems;
 
 import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
+import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.pipai.shmup.HeldKeys;
+import com.pipai.shmup.artemis.Tags;
 import com.pipai.shmup.artemis.components.StaticSpriteComponent;
 import com.pipai.shmup.artemis.components.XyComponent;
 
@@ -15,14 +17,27 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     private ComponentMapper<XyComponent> mXy;
     private ComponentMapper<StaticSpriteComponent> mStaticSprite;
 
+    private TagManager sTags;
+
     private HeldKeys heldKeys = new HeldKeys();
 
     private int bulletTimer;
 
+    private int playerSpeed = 4;
+
     @Override
     protected void processSystem() {
+        XyComponent cPlayerXy = mXy.get(sTags.getEntityId(Tags.PLAYER.toString()));
+
+        if (heldKeys.isDown(Input.Keys.RIGHT)) {
+            cPlayerXy.x += playerSpeed;
+        }
         if (heldKeys.isDown(Input.Keys.LEFT)) {
             System.out.println("You are holding LEFT!");
+        }
+        if (heldKeys.isDown(Input.Keys.UP)) {
+        }
+        if (heldKeys.isDown(Input.Keys.DOWN)) {
         }
     }
 
