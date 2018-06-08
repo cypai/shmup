@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.pipai.shmup.artemis.Configuration;
 import com.pipai.shmup.artemis.screens.MainLevelScreen;
 
 public class ShmupGame extends Game {
 
+    private Configuration configuration;
     private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
@@ -17,6 +19,7 @@ public class ShmupGame extends Game {
 
     @Override
     public void create() {
+        configuration = new Configuration();
         spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         font = new BitmapFont();
@@ -42,6 +45,10 @@ public class ShmupGame extends Game {
         spriteBatch.dispose();
         shapeRenderer.dispose();
         font.dispose();
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     public SpriteBatch getSpriteBatch() {

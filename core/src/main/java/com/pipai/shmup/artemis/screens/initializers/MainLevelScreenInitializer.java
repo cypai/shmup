@@ -34,7 +34,7 @@ public class MainLevelScreenInitializer {
     private void createPlayer() {
         int playerId = world.create();
         XyComponent cPlayerXy = mXy.create(playerId);
-        cPlayerXy.x = Gdx.graphics.getWidth() / 4;
+        cPlayerXy.x = Gdx.graphics.getWidth() / 3;
         StaticSpriteComponent cPlayerSprite = mStaticSprite.create(playerId);
         cPlayerSprite.sprite = new Sprite(game.getAssetManager().get("data/ship.png", Texture.class));
 
