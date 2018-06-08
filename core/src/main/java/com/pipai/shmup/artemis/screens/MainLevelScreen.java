@@ -11,11 +11,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
+import com.pipai.shmup.Utils;
 import com.pipai.shmup.artemis.components.StaticSpriteComponent;
 import com.pipai.shmup.artemis.components.XyComponent;
+import com.pipai.shmup.artemis.systems.ControlSystem;
 import com.pipai.shmup.artemis.systems.InputProcessingSystem;
 import com.pipai.shmup.artemis.systems.RenderingSystem;
-import com.pipai.shmup.artemis.systems.ControlSystem;
 import com.pipai.shmup.artemis.systems.input.ExitInputProcessor;
 import net.mostlyoriginal.api.event.common.EventSystem;
 
@@ -24,6 +25,13 @@ public class MainLevelScreen implements Screen {
     private World world;
 
     public MainLevelScreen(ShmupGame game) {
+        System.out.println("Calling the example function.");
+        int returnValue = Utils.example(1);
+        System.out.println("Return value of the example function: " + returnValue);
+
+        System.out.println("Now calling the object example function.");
+        Utils.objectExample();
+
         WorldConfiguration config = new WorldConfigurationBuilder()
                 .with(
                         new TagManager(),
