@@ -12,6 +12,7 @@ import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.Utils;
 import com.pipai.shmup.artemis.screens.initializers.MainLevelScreenInitializer;
 import com.pipai.shmup.artemis.systems.ControlSystem;
+import com.pipai.shmup.artemis.systems.GameStateSystem;
 import com.pipai.shmup.artemis.systems.InputProcessingSystem;
 import com.pipai.shmup.artemis.systems.RenderingSystem;
 import com.pipai.shmup.artemis.systems.input.ExitInputProcessor;
@@ -34,6 +35,8 @@ public class MainLevelScreen implements Screen {
                         new TagManager(),
                         new GroupManager(),
                         new EventSystem(),
+
+                        new GameStateSystem(),
 
                         new InputProcessingSystem(),
                         new RenderingSystem(game))
