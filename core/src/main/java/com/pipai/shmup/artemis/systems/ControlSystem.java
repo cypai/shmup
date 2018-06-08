@@ -10,10 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.HeldKeys;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.artemis.Tags;
-import com.pipai.shmup.artemis.components.BulletComponent;
-import com.pipai.shmup.artemis.components.MovementComponent;
-import com.pipai.shmup.artemis.components.StaticSpriteComponent;
-import com.pipai.shmup.artemis.components.XyComponent;
+import com.pipai.shmup.artemis.components.*;
 
 public class ControlSystem extends BaseSystem implements InputProcessor {
 
@@ -21,6 +18,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     private ComponentMapper<StaticSpriteComponent> mStaticSprite;
     private ComponentMapper<MovementComponent> mMovement;
     private ComponentMapper<BulletComponent> mBullet;
+    private ComponentMapper<OutOfScreenDestroyComponent> mOutOfScreenDestroy;
 
     private TagManager sTags;
 
@@ -69,6 +67,8 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         MovementComponent cMovement = mMovement.create(bulletId);
         cMovement.direction = (float) Math.PI / 2;
         cMovement.speed = 10;
+
+        mOutOfScreenDestroy.create(bulletId);
     }
 
     @Override

@@ -36,6 +36,7 @@ public class MainLevelScreen implements Screen {
                         new ControlSystem(game),
                         new GameStateSystem(),
                         new MovementSystem(),
+                        new OutOfScreenDestroySystem(),
 
                         new InputProcessingSystem(),
                         new RenderingSystem(game))
