@@ -11,10 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.Utils;
 import com.pipai.shmup.artemis.screens.initializers.MainLevelScreenInitializer;
-import com.pipai.shmup.artemis.systems.ControlSystem;
-import com.pipai.shmup.artemis.systems.GameStateSystem;
-import com.pipai.shmup.artemis.systems.InputProcessingSystem;
-import com.pipai.shmup.artemis.systems.RenderingSystem;
+import com.pipai.shmup.artemis.systems.*;
 import com.pipai.shmup.artemis.systems.input.ExitInputProcessor;
 import net.mostlyoriginal.api.event.common.EventSystem;
 
@@ -36,8 +33,9 @@ public class MainLevelScreen implements Screen {
                         new GroupManager(),
                         new EventSystem(),
 
-                        new ControlSystem(),
+                        new ControlSystem(game),
                         new GameStateSystem(),
+                        new MovementSystem(),
 
                         new InputProcessingSystem(),
                         new RenderingSystem(game))
