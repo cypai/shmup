@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.artemis.Tags;
+import com.pipai.shmup.artemis.components.EnemyComponent;
 import com.pipai.shmup.artemis.components.StaticSpriteComponent;
 import com.pipai.shmup.artemis.components.XyComponent;
 
@@ -18,6 +19,7 @@ public class MainLevelScreenInitializer {
 
     private ComponentMapper<XyComponent> mXy;
     private ComponentMapper<StaticSpriteComponent> mStaticSprite;
+    private ComponentMapper<EnemyComponent> mEnemy;
 
     private TagManager sTags;
 
@@ -29,6 +31,7 @@ public class MainLevelScreenInitializer {
 
     public void initialize() {
         createPlayer();
+        createEnemy();
     }
 
     private void createPlayer() {
@@ -39,6 +42,16 @@ public class MainLevelScreenInitializer {
         cPlayerSprite.sprite = new Sprite(game.getAssetManager().get("data/ship.png", Texture.class));
 
         sTags.register(Tags.PLAYER.toString(), playerId);
+    }
+
+    private void createEnemy() {
+        int enemyId = world.create();
+        XyComponent cEnemyXy = mXy.create(enemyId);
+        cEnemyXy.x = Gdx.graphics.getWidth() / 3;
+        cEnemyXy.y = Gdx.graphics.getHeight() * 2 / 3;
+        StaticSpriteComponent cEnemySprite = mStaticSprite.create(enemyId);
+        cEnemySprite.sprite = new Sprite(game.getAssetManager().get("data/enemy.png", Texture.class));
+        EnemyComponent cEnemy = mEnemy.create(enemyId);
     }
 
 }

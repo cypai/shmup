@@ -30,6 +30,7 @@ public class ShmupGame extends Game {
 
     private void loadSprites() {
         assetManager.load("data/ship.png", Texture.class);
+        assetManager.load("data/enemy.png", Texture.class);
         assetManager.load("data/red_bullet.png", Texture.class);
         assetManager.load("data/blue_bullet.png", Texture.class);
         assetManager.finishLoading();
