@@ -19,6 +19,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     private ComponentMapper<MovementComponent> mMovement;
     private ComponentMapper<BulletComponent> mBullet;
     private ComponentMapper<OutOfScreenDestroyComponent> mOutOfScreenDestroy;
+    private ComponentMapper<CollisionBoxComponent> mCollision;
 
     private TagManager sTags;
 
@@ -67,6 +68,9 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         MovementComponent cMovement = mMovement.create(bulletId);
         cMovement.direction = (float) Math.PI / 2;
         cMovement.speed = 10;
+
+        CollisionBoxComponent cCollision = mCollision.create(bulletId);
+        cCollision.set(0f, 0f, cSprite.sprite.getWidth(), cSprite.sprite.getHeight());
 
         mOutOfScreenDestroy.create(bulletId);
     }

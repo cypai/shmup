@@ -3,7 +3,9 @@ package com.pipai.shmup;
 import com.artemis.Aspect;
 import com.artemis.World;
 import com.artemis.utils.IntBag;
+import com.pipai.shmup.artemis.components.CollisionBoxComponent;
 import com.pipai.shmup.artemis.components.Dog;
+import com.pipai.shmup.artemis.components.XyComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,4 +96,10 @@ public class Utils {
         return entities;
     }
 
+    public static boolean collides(XyComponent xy1, CollisionBoxComponent collision1, XyComponent xy2, CollisionBoxComponent collision2) {
+        return xy1.x + collision1.xOffset < xy2.x + collision2.xOffset + collision2.width
+                && xy1.x + collision1.xOffset + collision1.width > xy2.x + collision2.xOffset
+                && xy1.y + collision1.yOffset < xy2.y + collision2.yOffset + collision2.height
+                && xy1.y + collision1.yOffset + collision1.height > xy2.y + collision2.yOffset;
+    }
 }
