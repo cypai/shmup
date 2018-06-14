@@ -43,6 +43,11 @@ public class BulletCollisionSystem extends IteratingSystem {
                 if (Utils.collides(cXy, cCollision, cEnemyXy, cEnemyCollision)) {
                     world.delete(entityId);
                     sGameState.score += 10;
+                    cEnemy.hp -= cBullet.damage;
+                    if (cEnemy.hp <= 0) {
+                        world.delete(enemyId);
+                        sGameState.score += 100;
+                    }
                 }
             }
         } else {
