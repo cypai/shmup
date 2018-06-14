@@ -41,8 +41,8 @@ public class BulletCollisionSystem extends IteratingSystem {
                 XyComponent cEnemyXy = mXy.get(enemyId);
                 CollisionBoxComponent cEnemyCollision = mCollision.get(enemyId);
                 if (Utils.collides(cXy, cCollision, cEnemyXy, cEnemyCollision)) {
-                    System.out.println("Enemy was hit!");
                     world.delete(entityId);
+                    sGameState.score += 10;
                 }
             }
         } else {
