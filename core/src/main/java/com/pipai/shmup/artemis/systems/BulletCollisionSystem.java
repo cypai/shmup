@@ -55,8 +55,8 @@ public class BulletCollisionSystem extends IteratingSystem {
             XyComponent cPlayerXy = mXy.get(playerId);
             CollisionBoxComponent cPlayerCollision = mCollision.get(playerId);
             if (Utils.collides(cXy, cCollision, cPlayerXy, cPlayerCollision)) {
-                System.out.println("Player was hit!");
                 world.delete(entityId);
+                sGameState.lives -= 1;
             }
         }
     }
