@@ -3,12 +3,14 @@ package com.pipai.shmup.artemis.systems;
 import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
 import com.artemis.managers.TagManager;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.HeldKeys;
 import com.pipai.shmup.ShmupGame;
+import com.pipai.shmup.artemis.Configuration;
 import com.pipai.shmup.artemis.Tags;
 import com.pipai.shmup.artemis.components.*;
 
@@ -38,17 +40,18 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     protected void processSystem() {
         int playerId = sTags.getEntityId(Tags.PLAYER.toString());
         XyComponent cPlayerXy = mXy.get(playerId);
+        StaticSpriteComponent cPlayerSprite = mStaticSprite.get(playerId);
 
-        if (heldKeys.isDown(Input.Keys.RIGHT)) {
+        if (heldKeys.isDown(Input.Keys.RIGHT) && cPlayerXy.x < Configuration.LEVEL_RIGHT_BOUND - cPlayerSprite.sprite.getWidth()) {
             cPlayerXy.x += playerSpeed;
         }
-        if (heldKeys.isDown(Input.Keys.LEFT)) {
+        if (heldKeys.isDown(Input.Keys.LEFT) && cPlayerXy.x > 0) {
             cPlayerXy.x -= playerSpeed;
         }
-        if (heldKeys.isDown(Input.Keys.UP)) {
+        if (heldKeys.isDown(Input.Keys.UP) && cPlayerXy.y < Gdx.graphics.getHeight() - cPlayerSprite.sprite.getHeight()) {
             cPlayerXy.y += playerSpeed;
         }
-        if (heldKeys.isDown(Input.Keys.DOWN)) {
+        if (heldKeys.isDown(Input.Keys.DOWN) && cPlayerXy.y > 0) {
             cPlayerXy.y -= playerSpeed;
         }
     }
