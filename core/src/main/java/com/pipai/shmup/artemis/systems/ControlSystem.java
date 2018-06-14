@@ -31,6 +31,8 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     private HeldKeys heldKeys = new HeldKeys();
 
     private int playerSpeed = 4;
+    private int bulletTimer = 0;
+    private int bulletDelay = 10;
 
     public ControlSystem(ShmupGame game) {
         this.game = game;
@@ -53,6 +55,13 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         }
         if (heldKeys.isDown(Input.Keys.DOWN) && cPlayerXy.y > 0) {
             cPlayerXy.y -= playerSpeed;
+        }
+        if (heldKeys.isDown(Input.Keys.Z) && bulletTimer <= 0) {
+            createBullet();
+            bulletTimer = bulletDelay;
+        }
+        if (bulletTimer > 0) {
+            bulletTimer -= 1;
         }
     }
 
@@ -85,9 +94,6 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         heldKeys.keyDown(keycode);
-        if (keycode == Input.Keys.Z) {
-            createBullet();
-        }
         if (keycode == Input.Keys.BACKSPACE) {
             sRender.debug = !sRender.debug;
         }
