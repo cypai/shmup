@@ -9,8 +9,11 @@ import com.pipai.shmup.artemis.components.XyComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Utils {
+
+    public static final Random RNG = new Random();
 
     /**
      * An example function with a single argument x. It does some stuff, then returns an integer.
