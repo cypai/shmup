@@ -43,11 +43,13 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
             cPlayerXy.x += playerSpeed;
         }
         if (heldKeys.isDown(Input.Keys.LEFT)) {
-            System.out.println("You are holding LEFT!");
+            cPlayerXy.x -= playerSpeed;
         }
         if (heldKeys.isDown(Input.Keys.UP)) {
+            cPlayerXy.y += playerSpeed;
         }
         if (heldKeys.isDown(Input.Keys.DOWN)) {
+            cPlayerXy.y -= playerSpeed;
         }
     }
 
