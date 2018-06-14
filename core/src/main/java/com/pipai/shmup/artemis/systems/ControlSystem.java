@@ -35,7 +35,8 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
 
     @Override
     protected void processSystem() {
-        XyComponent cPlayerXy = mXy.get(sTags.getEntityId(Tags.PLAYER.toString()));
+        int playerId = sTags.getEntityId(Tags.PLAYER.toString());
+        XyComponent cPlayerXy = mXy.get(playerId);
 
         if (heldKeys.isDown(Input.Keys.RIGHT)) {
             cPlayerXy.x += playerSpeed;
