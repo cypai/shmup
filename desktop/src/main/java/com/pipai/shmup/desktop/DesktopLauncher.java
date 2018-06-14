@@ -12,8 +12,8 @@ public final class DesktopLauncher {
     // @cs.suppress [UncommentedMain] this is the main entry point
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = 1024;
-        config.height = 768;
+        config.width = 800;
+        config.height = 600;
         config.resizable = false;
         new LwjglApplication(new ShmupGame(), config);
     }

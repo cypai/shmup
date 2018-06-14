@@ -3,7 +3,7 @@ package com.pipai.shmup.artemis;
 public class Configuration {
 
     private float leftBound = 0;
-    private float rightBound = 1024 * 2 / 3;
+    private float rightBound = 800 * 2 / 3;
 
     public float getLeftBound() {
         return leftBound;
@@ -22,7 +22,7 @@ public class Configuration {
     }
 
     public float getUiWidth() {
-        return 1024 - rightBound;
+        return 800 - rightBound;
     }
 
 }
