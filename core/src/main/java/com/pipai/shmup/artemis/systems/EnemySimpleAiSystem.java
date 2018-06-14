@@ -6,7 +6,6 @@ import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
-import com.pipai.shmup.Utils;
 import com.pipai.shmup.artemis.Configuration;
 import com.pipai.shmup.artemis.components.*;
 
@@ -49,9 +48,7 @@ public class EnemySimpleAiSystem extends IteratingSystem {
         cAi.bulletTimer -= 1;
         if (cAi.bulletTimer <= 0) {
             cAi.bulletTimer = cAi.bulletDelay;
-            for (int i = 0; i < 20; i += 1) {
-                createBullet(cXy.x, cXy.y, Utils.RNG.nextFloat() * 2 * (float) Math.PI, 5f);
-            }
+            createBullet(cXy.x, cXy.y, (float) Math.PI * 3 / 2, 10f);
         }
     }
 

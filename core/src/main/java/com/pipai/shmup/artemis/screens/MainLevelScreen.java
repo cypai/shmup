@@ -39,6 +39,9 @@ public class MainLevelScreen implements Screen {
                         new OutOfScreenDestroySystem(),
                         new BulletCollisionSystem(),
                         new EnemySimpleAiSystem(game),
+                        new LevelSystem(game),
+                        new PathInterpolationSystem(),
+                        new EnemyShotAiSystem(game),
 
                         new InputProcessingSystem(),
                         new RenderingSystem(game))

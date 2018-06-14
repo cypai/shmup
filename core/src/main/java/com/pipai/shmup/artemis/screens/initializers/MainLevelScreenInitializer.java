@@ -31,7 +31,6 @@ public class MainLevelScreenInitializer {
 
     public void initialize() {
         createPlayer();
-        createEnemy();
     }
 
     private void createPlayer() {
@@ -44,20 +43,6 @@ public class MainLevelScreenInitializer {
         cCollision.set(16f, 12f, 16f, 16f);
 
         sTags.register(Tags.PLAYER.toString(), playerId);
-    }
-
-    private void createEnemy() {
-        int enemyId = world.create();
-        XyComponent cEnemyXy = mXy.create(enemyId);
-        cEnemyXy.x = Gdx.graphics.getWidth() / 3;
-        cEnemyXy.y = Gdx.graphics.getHeight() * 2 / 3;
-        StaticSpriteComponent cEnemySprite = mStaticSprite.create(enemyId);
-        cEnemySprite.sprite = new Sprite(game.getAssetManager().get("data/enemy.png", Texture.class));
-        EnemyComponent cEnemy = mEnemy.create(enemyId);
-        CollisionBoxComponent cCollision = mCollision.create(enemyId);
-        cCollision.set(16f, 20f, 16f, 16f);
-        EnemySimpleAiComponent cAi = mEnemySimpleAi.create(enemyId);
-        cAi.bulletDelay = 60;
     }
 
 }
