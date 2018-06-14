@@ -56,7 +56,8 @@ public class MainLevelScreenInitializer {
         EnemyComponent cEnemy = mEnemy.create(enemyId);
         CollisionBoxComponent cCollision = mCollision.create(enemyId);
         cCollision.set(16f, 20f, 16f, 16f);
-        mEnemySimpleAi.create(enemyId);
+        EnemySimpleAiComponent cAi = mEnemySimpleAi.create(enemyId);
+        cAi.bulletDelay = 60;
     }
 
 }

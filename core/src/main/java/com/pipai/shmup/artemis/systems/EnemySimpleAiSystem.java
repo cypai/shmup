@@ -3,17 +3,22 @@ package com.pipai.shmup.artemis.systems;
 import com.artemis.Aspect;
 import com.artemis.ComponentMapper;
 import com.artemis.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.artemis.Configuration;
-import com.pipai.shmup.artemis.components.EnemyComponent;
-import com.pipai.shmup.artemis.components.EnemySimpleAiComponent;
-import com.pipai.shmup.artemis.components.XyComponent;
+import com.pipai.shmup.artemis.components.*;
 
 public class EnemySimpleAiSystem extends IteratingSystem {
 
     private ComponentMapper<XyComponent> mXy;
     private ComponentMapper<EnemyComponent> mEnemy;
     private ComponentMapper<EnemySimpleAiComponent> mEnemySimpleAi;
+    private ComponentMapper<StaticSpriteComponent> mStaticSprite;
+    private ComponentMapper<MovementComponent> mMovement;
+    private ComponentMapper<BulletComponent> mBullet;
+    private ComponentMapper<OutOfScreenDestroyComponent> mOutOfScreenDestroy;
+    private ComponentMapper<CollisionBoxComponent> mCollision;
 
     private ShmupGame game;
 
@@ -40,6 +45,34 @@ public class EnemySimpleAiSystem extends IteratingSystem {
                 cXy.x += 3;
             }
         }
+        cAi.bulletTimer -= 1;
+        if (cAi.bulletTimer <= 0) {
+            cAi.bulletTimer = cAi.bulletDelay;
+            createBullet(cXy.x, cXy.y, (float) Math.PI * 3 / 2, 10f);
+        }
+    }
+
+    private void createBullet(float x, float y, float direction, float speed) {
+        int bulletId = world.create();
+
+        XyComponent cXy = mXy.create(bulletId);
+        cXy.x = x;
+        cXy.y = y;
+
+        StaticSpriteComponent cSprite = mStaticSprite.create(bulletId);
+        cSprite.sprite = new Sprite(game.getAssetManager().get("data/red_bullet.png", Texture.class));
+
+        BulletComponent cBullet = mBullet.create(bulletId);
+        cBullet.isPlayerBullet = false;
+
+        MovementComponent cMovement = mMovement.create(bulletId);
+        cMovement.direction = direction;
+        cMovement.speed = speed;
+
+        CollisionBoxComponent cCollision = mCollision.create(bulletId);
+        cCollision.set(0f, 0f, cSprite.sprite.getWidth(), cSprite.sprite.getHeight());
+
+        mOutOfScreenDestroy.create(bulletId);
     }
 
 }
