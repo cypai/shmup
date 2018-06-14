@@ -42,6 +42,8 @@ public class MainLevelScreenInitializer {
         cPlayerXy.x = Gdx.graphics.getWidth() / 3;
         StaticSpriteComponent cPlayerSprite = mStaticSprite.create(playerId);
         cPlayerSprite.sprite = new Sprite(game.getAssetManager().get("data/ship.png", Texture.class));
+        CollisionBoxComponent cCollision = mCollision.create(playerId);
+        cCollision.set(8f, 8f, 16f, 16f);
 
         sTags.register(Tags.PLAYER.toString(), playerId);
     }
