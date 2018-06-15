@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.Utils;
 import com.pipai.shmup.artemis.Configuration;
+import com.pipai.shmup.artemis.components.CollisionBoxComponent;
 import com.pipai.shmup.artemis.components.StaticSpriteComponent;
 import com.pipai.shmup.artemis.components.XyComponent;
 
@@ -20,6 +21,7 @@ public class RenderingSystem extends BaseSystem {
 
     private ComponentMapper<XyComponent> mXy;
     private ComponentMapper<StaticSpriteComponent> mStaticSprite;
+    private ComponentMapper<CollisionBoxComponent> mCollision;
 
     private GameStateSystem sGameState;
 
@@ -28,6 +30,8 @@ public class RenderingSystem extends BaseSystem {
     private SpriteBatch spr;
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
+
+    private boolean debug = false;
 
     public RenderingSystem(ShmupGame game) {
         config = game.getConfiguration();
@@ -40,6 +44,9 @@ public class RenderingSystem extends BaseSystem {
     protected void processSystem() {
         renderStaticSprites();
         renderUi();
+        if (debug) {
+            renderCollisionDebug();
+        }
     }
 
     private void renderStaticSprites() {
@@ -71,5 +78,18 @@ public class RenderingSystem extends BaseSystem {
         font.draw(spr, "Score: " + sGameState.score, uiLeft + padding, uiHeight - padding);
         font.draw(spr, "Lives: " + sGameState.lives, uiLeft + padding, uiHeight - padding - lineHeight);
         spr.end();
+    }
+
+    private void renderCollisionDebug() {
+        List<Integer> entities = Utils.fetchEntities(world, Aspect.all(XyComponent.class, CollisionBoxComponent.class));
+
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        for (Integer entity : entities) {
+            XyComponent cXy = mXy.get(entity);
+            CollisionBoxComponent cCollision = mCollision.get(entity);
+            shapeRenderer.rect(cXy.x + cCollision.xOffset, cXy.y + cCollision.yOffset, cCollision.width, cCollision.height);
+        }
+        shapeRenderer.end();
     }
 }
