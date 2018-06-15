@@ -56,7 +56,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         int bulletId = world.create();
 
         XyComponent cXy = mXy.create(bulletId);
-        cXy.x = cPlayerXy.x;
+        cXy.x = cPlayerXy.x + 12f;
         cXy.y = cPlayerXy.y;
 
         StaticSpriteComponent cSprite = mStaticSprite.create(bulletId);
@@ -71,7 +71,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         cMovement.speed = 10;
 
         CollisionBoxComponent cCollision = mCollision.create(bulletId);
-        cCollision.set(0f, 0f, cSprite.sprite.getWidth(), cSprite.sprite.getHeight());
+        cCollision.set(4f, 4f, cSprite.sprite.getWidth() - 8f, cSprite.sprite.getHeight() - 8f);
 
         mOutOfScreenDestroy.create(bulletId);
     }

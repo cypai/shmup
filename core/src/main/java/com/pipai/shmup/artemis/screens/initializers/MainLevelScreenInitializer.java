@@ -43,7 +43,7 @@ public class MainLevelScreenInitializer {
         StaticSpriteComponent cPlayerSprite = mStaticSprite.create(playerId);
         cPlayerSprite.sprite = new Sprite(game.getAssetManager().get("data/ship.png", Texture.class));
         CollisionBoxComponent cCollision = mCollision.create(playerId);
-        cCollision.set(8f, 8f, 16f, 16f);
+        cCollision.set(16f, 12f, 16f, 16f);
 
         sTags.register(Tags.PLAYER.toString(), playerId);
     }
@@ -57,7 +57,7 @@ public class MainLevelScreenInitializer {
         cEnemySprite.sprite = new Sprite(game.getAssetManager().get("data/enemy.png", Texture.class));
         EnemyComponent cEnemy = mEnemy.create(enemyId);
         CollisionBoxComponent cCollision = mCollision.create(enemyId);
-        cCollision.set(8f, 8f, 16f, 16f);
+        cCollision.set(16f, 20f, 16f, 16f);
     }
 
 }
