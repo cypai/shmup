@@ -32,7 +32,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
 
     private int playerSpeed = 4;
     private int bulletTimer = 0;
-    private int bulletDelay = 10;
+    private int bulletDelay = 8;
 
     public ControlSystem(ShmupGame game) {
         this.game = game;
@@ -57,7 +57,8 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
             cPlayerXy.y -= playerSpeed;
         }
         if (heldKeys.isDown(Input.Keys.Z) && bulletTimer <= 0) {
-            createBullet();
+            createBullet(cPlayerXy.x + 4f, cPlayerXy.y, (float) Math.PI / 2, 3);
+            createBullet(cPlayerXy.x + 18f, cPlayerXy.y, (float) Math.PI / 2, 3);
             bulletTimer = bulletDelay;
         }
         if (bulletTimer > 0) {
@@ -65,25 +66,23 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         }
     }
 
-    private void createBullet() {
-        XyComponent cPlayerXy = mXy.get(sTags.getEntityId(Tags.PLAYER.toString()));
-
+    private void createBullet(float x, float y, float direction, int damage) {
         int bulletId = world.create();
 
         XyComponent cXy = mXy.create(bulletId);
-        cXy.x = cPlayerXy.x + 12f;
-        cXy.y = cPlayerXy.y;
+        cXy.x = x;
+        cXy.y = y;
 
         StaticSpriteComponent cSprite = mStaticSprite.create(bulletId);
         cSprite.sprite = new Sprite(game.getAssetManager().get("data/blue_bullet_player.png", Texture.class));
 
         BulletComponent cBullet = mBullet.create(bulletId);
-        cBullet.damage = 1;
+        cBullet.damage = damage;
         cBullet.isPlayerBullet = true;
 
         MovementComponent cMovement = mMovement.create(bulletId);
-        cMovement.direction = (float) Math.PI / 2;
-        cMovement.speed = 10;
+        cMovement.direction = direction;
+        cMovement.speed = 12;
 
         CollisionBoxComponent cCollision = mCollision.create(bulletId);
         cCollision.set(4f, 4f, cSprite.sprite.getWidth() - 8f, cSprite.sprite.getHeight() - 8f);
