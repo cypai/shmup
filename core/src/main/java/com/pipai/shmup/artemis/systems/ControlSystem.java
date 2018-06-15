@@ -44,6 +44,12 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         XyComponent cPlayerXy = mXy.get(playerId);
         StaticSpriteComponent cPlayerSprite = mStaticSprite.get(playerId);
 
+
+        if (heldKeys.isDown(Input.Keys.SHIFT_LEFT)) {
+            playerSpeed = 2;
+        } else {
+            playerSpeed = 4;
+        }
         if (heldKeys.isDown(Input.Keys.RIGHT) && cPlayerXy.x < Configuration.LEVEL_RIGHT_BOUND - cPlayerSprite.sprite.getWidth()) {
             cPlayerXy.x += playerSpeed;
         }
