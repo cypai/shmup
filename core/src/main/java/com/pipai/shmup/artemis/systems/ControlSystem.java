@@ -22,6 +22,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
     private ComponentMapper<CollisionBoxComponent> mCollision;
 
     private TagManager sTags;
+    private RenderingSystem sRender;
 
     private ShmupGame game;
 
@@ -81,6 +82,9 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         heldKeys.keyDown(keycode);
         if (keycode == Input.Keys.Z) {
             createBullet();
+        }
+        if (keycode == Input.Keys.BACKSPACE) {
+            sRender.debug = !sRender.debug;
         }
         return false;
     }

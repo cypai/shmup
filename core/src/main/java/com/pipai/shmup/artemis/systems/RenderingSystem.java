@@ -31,7 +31,7 @@ public class RenderingSystem extends BaseSystem {
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
 
-    private boolean debug = false;
+    public boolean debug = false;
 
     public RenderingSystem(ShmupGame game) {
         config = game.getConfiguration();
