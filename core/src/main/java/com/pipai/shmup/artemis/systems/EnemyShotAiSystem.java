@@ -88,7 +88,7 @@ public class EnemyShotAiSystem extends IteratingSystem {
         cMovement.speed = speed;
 
         CollisionBoxComponent cCollision = mCollision.create(bulletId);
-        cCollision.set(0f, 0f, cSprite.sprite.getWidth(), cSprite.sprite.getHeight());
+        cCollision.set(12f, 12f, cSprite.sprite.getWidth() - 24f, cSprite.sprite.getHeight() - 24f);
 
         mOutOfScreenDestroy.create(bulletId);
     }
