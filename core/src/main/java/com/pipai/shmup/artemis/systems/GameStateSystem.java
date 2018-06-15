@@ -10,7 +10,7 @@ public class GameStateSystem extends BaseSystem {
 
     @Override
     protected void processSystem() {
-        if (lives == 0) {
+        if (lives <= 0) {
             System.out.println("Oh no! Game over. Your final score was: " + score);
             Gdx.app.exit();
         }
