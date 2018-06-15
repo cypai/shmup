@@ -20,25 +20,32 @@ public class PathInterpolationSystem extends IteratingSystem {
         XyComponent cXy = mXy.get(entityId);
         PathInterpolationComponent cInterpolation = mInterpolation.get(entityId);
 
-        cInterpolation.t += 1;
-        if (cInterpolation.t > cInterpolation.tMax) {
-            mInterpolation.remove(entityId);
-            switch (cInterpolation.onEndStrategy) {
-                case REMOVE:
-                    mInterpolation.remove(entityId);
-                    break;
-                case DESTROY:
-                    world.delete(entityId);
-                    break;
-            }
-            if (cInterpolation.onEnd != null) {
-                cInterpolation.onEnd.run();
-            }
+        if (cInterpolation.delay > 0) {
+            cInterpolation.delay--;
+            return;
         }
+
+        cInterpolation.t += 1;
 
         float a = (float) cInterpolation.t / (float) cInterpolation.tMax;
         cXy.x = cInterpolation.interpolation.apply(cInterpolation.xStart, cInterpolation.xEnd, a);
         cXy.y = cInterpolation.interpolation.apply(cInterpolation.yStart, cInterpolation.yEnd, a);
+
+        if (cInterpolation.t > cInterpolation.tMax) {
+            if (cInterpolation.onEndStrategy != null) {
+                switch (cInterpolation.onEndStrategy) {
+                    case REMOVE:
+                        mInterpolation.remove(entityId);
+                        break;
+                    case DESTROY:
+                        world.delete(entityId);
+                        break;
+                }
+            }
+            if (cInterpolation.onEnd != null) {
+                cInterpolation.onEnd.accept(cInterpolation);
+            }
+        }
     }
 
 }

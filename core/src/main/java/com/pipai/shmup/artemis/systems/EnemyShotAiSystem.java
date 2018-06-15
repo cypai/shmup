@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.Utils;
+import com.pipai.shmup.artemis.Tags;
 import com.pipai.shmup.artemis.components.*;
 
 public class EnemyShotAiSystem extends IteratingSystem {
@@ -58,11 +59,23 @@ public class EnemyShotAiSystem extends IteratingSystem {
                         }
                         break;
                     }
-                    case RANDOM_SAME:
+                    case RANDOM_SAME: {
                         float directionDelta = shotType.spreadAngle / shotType.amount;
                         for (int i = 0; i < shotType.amount; i++) {
                             createBullet(cXy.x, cXy.y, randomSameDirection + i * directionDelta, shotType.speed, shotType.spriteFilename);
                         }
+                        break;
+                    }
+                    case AIMED: {
+                        int playerId = sTags.getEntityId(Tags.PLAYER.toString());
+                        XyComponent cPlayerXy = mXy.get(playerId);
+                        float direction = (float) Math.atan2(cPlayerXy.y - cXy.y, cPlayerXy.x - cXy.x);
+                        float directionDelta = shotType.spreadAngle / shotType.amount;
+                        for (int i = 0; i < shotType.amount; i++) {
+                            createBullet(cXy.x, cXy.y, direction + i * directionDelta, shotType.speed, shotType.spriteFilename);
+                        }
+                        break;
+                    }
                     default:
                         break;
                 }
