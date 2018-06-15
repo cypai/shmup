@@ -32,7 +32,12 @@ public class ShmupGame extends Game {
         assetManager.load("data/ship.png", Texture.class);
         assetManager.load("data/enemy.png", Texture.class);
         assetManager.load("data/red_bullet.png", Texture.class);
-        assetManager.load("data/blue_bullet.png", Texture.class);
+        assetManager.load("data/red_bullet_large.png", Texture.class);
+        assetManager.load("data/yellow_bullet_large.png", Texture.class);
+        assetManager.load("data/blue_bullet_large.png", Texture.class);
+        assetManager.load("data/green_bullet_large.png", Texture.class);
+        assetManager.load("data/purple_bullet_large.png", Texture.class);
+        assetManager.load("data/blue_bullet_player.png", Texture.class);
         assetManager.finishLoading();
     }
 

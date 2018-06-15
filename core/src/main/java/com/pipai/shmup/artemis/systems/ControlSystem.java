@@ -60,7 +60,7 @@ public class ControlSystem extends BaseSystem implements InputProcessor {
         cXy.y = cPlayerXy.y;
 
         StaticSpriteComponent cSprite = mStaticSprite.create(bulletId);
-        cSprite.sprite = new Sprite(game.getAssetManager().get("data/blue_bullet.png", Texture.class));
+        cSprite.sprite = new Sprite(game.getAssetManager().get("data/blue_bullet_player.png", Texture.class));
 
         BulletComponent cBullet = mBullet.create(bulletId);
         cBullet.damage = 1;
