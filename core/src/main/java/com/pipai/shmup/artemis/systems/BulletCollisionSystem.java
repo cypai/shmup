@@ -51,6 +51,7 @@ public class BulletCollisionSystem extends IteratingSystem {
                         if (cEnemy.isBoss) {
                             sBoss.setEnabled(false);
                             sGameState.score += 1900;
+                            sRender.gameEndString = "Congratulations! You win!";
                         }
                     }
                 }
