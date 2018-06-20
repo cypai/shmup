@@ -67,10 +67,15 @@ public class EnemyShotAiSystem extends IteratingSystem {
                         break;
                     }
                     case AIMED: {
-                        int playerId = sTags.getEntityId(Tags.PLAYER.toString());
-                        XyComponent cPlayerXy = mXy.get(playerId);
                         float directionDelta = shotType.spreadAngle / shotType.amount;
-                        float direction = (float) Math.atan2(cPlayerXy.y - cXy.y, cPlayerXy.x - cXy.x);
+                        float direction;
+                        try {
+                            int playerId = sTags.getEntityId(Tags.PLAYER.toString());
+                            XyComponent cPlayerXy = mXy.get(playerId);
+                            direction = (float) Math.atan2(cPlayerXy.y - cXy.y, cPlayerXy.x - cXy.x);
+                        } catch (Exception e) {
+                            direction = (float) Math.PI * 3 / 2;
+                        }
                         if (shotType.amount % 2 == 1) {
                             direction -= directionDelta * ((shotType.amount - 1) / 2);
                         } else {
