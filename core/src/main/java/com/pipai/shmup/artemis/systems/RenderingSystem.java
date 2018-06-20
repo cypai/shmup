@@ -25,8 +25,6 @@ public class RenderingSystem extends BaseSystem {
 
     private GameStateSystem sGameState;
 
-    private Configuration config;
-
     private SpriteBatch spr;
     private ShapeRenderer shapeRenderer;
     private BitmapFont font;
@@ -34,7 +32,6 @@ public class RenderingSystem extends BaseSystem {
     public boolean debug = false;
 
     public RenderingSystem(ShmupGame game) {
-        config = game.getConfiguration();
         spr = game.getSpriteBatch();
         shapeRenderer = game.getShapeRenderer();
         font = game.getFont();
@@ -63,8 +60,8 @@ public class RenderingSystem extends BaseSystem {
     }
 
     private void renderUi() {
-        float uiLeft = config.getRightBound();
-        float uiWidth = config.getUiWidth();
+        float uiLeft = Configuration.LEVEL_RIGHT_BOUND;
+        float uiWidth = Configuration.UI_WIDTH;
         float uiHeight = Gdx.graphics.getHeight();
         float padding = 36f;
 
