@@ -47,7 +47,7 @@ public class MainLevelScreen implements Screen {
 
         InputProcessingSystem inputProcessingSystem = world.getSystem(InputProcessingSystem.class);
         inputProcessingSystem.addProcessor(world.getSystem(ControlSystem.class));
-        inputProcessingSystem.addProcessor(new ExitInputProcessor());
+        inputProcessingSystem.addProcessor(new ExitInputProcessor(game));
 
         new MainLevelScreenInitializer(game, world).initialize();
     }
