@@ -18,10 +18,10 @@ public class OutOfScreenDestroySystem extends IteratingSystem {
     @Override
     protected void process(int entityId) {
         XyComponent cXy = mXy.get(entityId);
-        if (cXy.x < 0
-                || cXy.x > Gdx.graphics.getWidth()
-                || cXy.y < 0
-                || cXy.y > Gdx.graphics.getHeight()) {
+        if (cXy.x < -32
+                || cXy.x > Gdx.graphics.getWidth() + 32
+                || cXy.y < -32
+                || cXy.y > Gdx.graphics.getHeight() + 32) {
 
             world.delete(entityId);
         }
