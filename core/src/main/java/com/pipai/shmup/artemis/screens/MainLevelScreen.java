@@ -42,6 +42,7 @@ public class MainLevelScreen implements Screen {
                         new LevelSystem(game),
                         new PathInterpolationSystem(),
                         new EnemyShotAiSystem(game),
+                        new BossSystem(game),
 
                         new InputProcessingSystem(),
                         new RenderingSystem(game))

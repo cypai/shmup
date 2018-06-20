@@ -2,12 +2,14 @@ package com.pipai.shmup.artemis.systems;
 
 import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
+import com.artemis.managers.TagManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Interpolation;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.artemis.Configuration;
+import com.pipai.shmup.artemis.Tags;
 import com.pipai.shmup.artemis.components.*;
 
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class LevelSystem extends BaseSystem {
     private ComponentMapper<CollisionBoxComponent> mCollision;
     private ComponentMapper<PathInterpolationComponent> mInterpolation;
     private ComponentMapper<EnemyShotAiComponent> mShotAi;
+
+    private TagManager sTags;
+    private BossSystem sBoss;
 
     private ShmupGame game;
 
@@ -59,6 +64,10 @@ public class LevelSystem extends BaseSystem {
             giveStandardAimedTripleShot(enemyId2, 3, 6, 60);
             int enemyId3 = createTopJumpEnemy(280, 520, 14, standardExit());
             giveStandardAimedTripleShot(enemyId3, 3, 6, 60);
+        } else if (timer == 720) {
+            int bossId = createTopJumpBoss(240, 520, 600);
+            sTags.register(Tags.BOSS.toString(), bossId);
+            sBoss.setEnabled(true);
         }
     }
 
@@ -140,6 +149,20 @@ public class LevelSystem extends BaseSystem {
         cInterpolation.xEnd = x;
         cInterpolation.yEnd = endY;
         cInterpolation.onEnd = onEnd;
+        return enemyId;
+    }
+
+    private int createTopJumpBoss(float x, float endY, int hp) {
+        int enemyId = createGenericEnemy(x, Gdx.graphics.getHeight() + 32, hp);
+        XyComponent cEnemyXy = mXy.get(enemyId);
+        PathInterpolationComponent cInterpolation = mInterpolation.create(enemyId);
+        cInterpolation.setStart(cEnemyXy);
+        cInterpolation.interpolation = Interpolation.pow2;
+        cInterpolation.tMax = 60;
+        cInterpolation.xEnd = x;
+        cInterpolation.yEnd = endY;
+        cInterpolation.onEndStrategy = PathInterpolationComponent.OnEndStrategy.REMOVE;
+        mEnemy.get(enemyId).isBoss = true;
         return enemyId;
     }
 

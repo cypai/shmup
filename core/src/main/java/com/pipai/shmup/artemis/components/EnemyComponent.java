@@ -6,4 +6,6 @@ public class EnemyComponent extends Component {
 
     public int hp = 10;
 
+    public boolean isBoss = false;
+
 }

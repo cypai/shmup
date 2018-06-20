@@ -25,6 +25,15 @@ public class CircularShotType {
         return this;
     }
 
+    public CircularShotType withDirection(int amount, int speed, float direction, String spriteFilename) {
+        this.amount = amount;
+        this.speed = speed;
+        this.direction = direction;
+        this.spriteFilename = spriteFilename;
+        this.aimType = AimType.DIRECTION;
+        return this;
+    }
+
     public enum AimType {
         AIMED, RANDOM, RANDOM_SAME, DIRECTION
     }

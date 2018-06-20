@@ -69,10 +69,22 @@ public class EnemyShotAiSystem extends IteratingSystem {
                     case AIMED: {
                         int playerId = sTags.getEntityId(Tags.PLAYER.toString());
                         XyComponent cPlayerXy = mXy.get(playerId);
-                        float direction = (float) Math.atan2(cPlayerXy.y - cXy.y, cPlayerXy.x - cXy.x);
                         float directionDelta = shotType.spreadAngle / shotType.amount;
+                        float direction = (float) Math.atan2(cPlayerXy.y - cXy.y, cPlayerXy.x - cXy.x);
+                        if (shotType.amount % 2 == 1) {
+                            direction -= directionDelta * ((shotType.amount - 1) / 2);
+                        } else {
+                            direction -= directionDelta * (shotType.amount / 2) - directionDelta / 2;
+                        }
                         for (int i = 0; i < shotType.amount; i++) {
                             createBullet(cXy.x, cXy.y, direction + i * directionDelta, shotType.speed, shotType.spriteFilename);
+                        }
+                        break;
+                    }
+                    case DIRECTION: {
+                        float directionDelta = shotType.spreadAngle / shotType.amount;
+                        for (int i = 0; i < shotType.amount; i++) {
+                            createBullet(cXy.x, cXy.y, shotType.direction + i * directionDelta, shotType.speed, shotType.spriteFilename);
                         }
                         break;
                     }

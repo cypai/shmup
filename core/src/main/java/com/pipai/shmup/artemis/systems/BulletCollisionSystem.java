@@ -23,6 +23,7 @@ public class BulletCollisionSystem extends IteratingSystem {
     private TagManager sTags;
     private GameStateSystem sGameState;
     private RenderingSystem sRender;
+    private BossSystem sBoss;
 
     public BulletCollisionSystem() {
         super(Aspect.all(BulletComponent.class, XyComponent.class, CollisionBoxComponent.class));
@@ -47,6 +48,10 @@ public class BulletCollisionSystem extends IteratingSystem {
                     if (cEnemy.hp <= 0) {
                         world.delete(enemyId);
                         sGameState.score += 100;
+                        if (cEnemy.isBoss) {
+                            sBoss.setEnabled(false);
+                            sGameState.score += 1900;
+                        }
                     }
                 }
             }
