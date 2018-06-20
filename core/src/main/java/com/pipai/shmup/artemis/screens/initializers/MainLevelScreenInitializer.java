@@ -8,10 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.pipai.shmup.ShmupGame;
 import com.pipai.shmup.artemis.Tags;
-import com.pipai.shmup.artemis.components.CollisionBoxComponent;
-import com.pipai.shmup.artemis.components.EnemyComponent;
-import com.pipai.shmup.artemis.components.StaticSpriteComponent;
-import com.pipai.shmup.artemis.components.XyComponent;
+import com.pipai.shmup.artemis.components.*;
 
 public class MainLevelScreenInitializer {
 
@@ -22,6 +19,7 @@ public class MainLevelScreenInitializer {
     private ComponentMapper<StaticSpriteComponent> mStaticSprite;
     private ComponentMapper<EnemyComponent> mEnemy;
     private ComponentMapper<CollisionBoxComponent> mCollision;
+    private ComponentMapper<EnemySimpleAiComponent> mEnemySimpleAi;
 
     private TagManager sTags;
 
@@ -58,6 +56,7 @@ public class MainLevelScreenInitializer {
         EnemyComponent cEnemy = mEnemy.create(enemyId);
         CollisionBoxComponent cCollision = mCollision.create(enemyId);
         cCollision.set(16f, 20f, 16f, 16f);
+        mEnemySimpleAi.create(enemyId);
     }
 
 }
