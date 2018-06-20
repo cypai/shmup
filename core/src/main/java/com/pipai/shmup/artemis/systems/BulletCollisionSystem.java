@@ -22,6 +22,7 @@ public class BulletCollisionSystem extends IteratingSystem {
 
     private TagManager sTags;
     private GameStateSystem sGameState;
+    private RenderingSystem sRender;
 
     public BulletCollisionSystem() {
         super(Aspect.all(BulletComponent.class, XyComponent.class, CollisionBoxComponent.class));

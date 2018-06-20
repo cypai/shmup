@@ -30,6 +30,7 @@ public class RenderingSystem extends BaseSystem {
     private BitmapFont font;
 
     public boolean debug = false;
+    public String gameEndString = "";
 
     public RenderingSystem(ShmupGame game) {
         spr = game.getSpriteBatch();
@@ -41,6 +42,7 @@ public class RenderingSystem extends BaseSystem {
     protected void processSystem() {
         renderStaticSprites();
         renderUi();
+        renderGameEnd();
         if (debug) {
             renderCollisionDebug();
         }
@@ -74,6 +76,12 @@ public class RenderingSystem extends BaseSystem {
         spr.begin();
         font.draw(spr, "Score: " + sGameState.score, uiLeft + padding, uiHeight - padding);
         font.draw(spr, "Lives: " + sGameState.lives, uiLeft + padding, uiHeight - padding - lineHeight);
+        spr.end();
+    }
+
+    private void renderGameEnd() {
+        spr.begin();
+        font.draw(spr, gameEndString, Configuration.LEVEL_RIGHT_BOUND / 2 - 100, Gdx.graphics.getHeight() / 2);
         spr.end();
     }
 
